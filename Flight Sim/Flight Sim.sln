@@ -1,7 +1,11 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{E5B8D3FC-51A5-0525-FD06-E7F535C3B7B3}") = "Flight Sim", "Assembly-CSharp-firstpass.csproj", "{2F4D4EC5-B079-BCBF-C084-2F3F93073D00}"
+EndProject
 Project("{E5B8D3FC-51A5-0525-FD06-E7F535C3B7B3}") = "Flight Sim", "Assembly-CSharp.csproj", "{B8876376-6D4C-88AC-ADEE-4E12BBC918ED}"
+EndProject
+Project("{E5B8D3FC-51A5-0525-FD06-E7F535C3B7B3}") = "Flight Sim", "Assembly-CSharp-Editor.csproj", "{08B5136E-D3E8-0CFA-64E1-28067AAEC5ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,15 +13,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F4D4EC5-B079-BCBF-C084-2F3F93073D00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F4D4EC5-B079-BCBF-C084-2F3F93073D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F4D4EC5-B079-BCBF-C084-2F3F93073D00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F4D4EC5-B079-BCBF-C084-2F3F93073D00}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B8876376-6D4C-88AC-ADEE-4E12BBC918ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B8876376-6D4C-88AC-ADEE-4E12BBC918ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8876376-6D4C-88AC-ADEE-4E12BBC918ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8876376-6D4C-88AC-ADEE-4E12BBC918ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08B5136E-D3E8-0CFA-64E1-28067AAEC5ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08B5136E-D3E8-0CFA-64E1-28067AAEC5ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08B5136E-D3E8-0CFA-64E1-28067AAEC5ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08B5136E-D3E8-0CFA-64E1-28067AAEC5ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-					GlobalSection(MonoDevelopProperties) = preSolution
+								GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
