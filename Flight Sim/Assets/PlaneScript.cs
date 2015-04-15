@@ -17,8 +17,10 @@ public class PlaneScript : MonoBehaviour {
 
 	float pitchSpeed = 90; //deg/s
 	float rollSpeed = 180; //deg/s
+	float yawSpeed = 30; //deg/s
 
 	float throttle = 1;
+	float throttleSensitivity = 0.5f; //stuffs
 
 	float health;
 
@@ -89,12 +91,14 @@ public class PlaneScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		Debug.Log (Input.GetAxis ("Fire1"));
 		if (alive) {
 			float speedFraction = Mathf.Max (speed/maxSpeed, 0.7f);
 			Vector3 dR = new Vector3(Input.GetAxis("Vertical"+playerNum) * pitchSpeed * Time.deltaTime * speedFraction,
-			                         Input.GetAxis ("Horizontal"+playerNum) * rollSpeed * Time.deltaTime * speedFraction, 0); //change in rotation from user input
+			                         Input.GetAxis ("Horizontal"+playerNum) * rollSpeed * Time.deltaTime * speedFraction,
+			                         Input.GetAxis ("Yaw"+playerNum) * yawSpeed * Time.deltaTime * speedFraction); //change in rotation from user input
 			//change in thrust from user input??
-			throttle += Input.GetAxis ("Throttle"+playerNum) * Time.deltaTime;
+			throttle += Input.GetAxis ("Throttle"+playerNum) * Time.deltaTime * throttleSensitivitys;
 			throttle = Mathf.Clamp(throttle, 0, 1.2f);
 			//change in speed from angle
 			speed += transform.up.y * acceleration * Time.deltaTime + (throttle-1) * Time.deltaTime * acceleration; //the plane's "up" is along its length
@@ -112,7 +116,7 @@ public class PlaneScript : MonoBehaviour {
 			}
 
 
-			if (Input.GetButton ("Fire"+playerNum)) { //add a bit of a wobble to the firing to be more connical... +- 5 degrees?
+			if (Input.GetAxis ("Fire"+playerNum) > 0.5) { //add a bit of a wobble to the firing to be more connical... +- 5 degrees?
 				if (bulletsFired >= clipSize) {
 					if (!reloading) {
 						reloading = true;
