@@ -12,6 +12,8 @@ public class PlaneScript : MonoBehaviour {
 	public float maxHealth = 10;
 	public Text text;
 
+	float points = 0;
+
 	float maxSpeed = 225; //m/s
 	float minSpeed = 25; //m/s
 
@@ -56,9 +58,13 @@ public class PlaneScript : MonoBehaviour {
 		Gun1 = transform.Find ("Gun1");
 		Gun2 = transform.Find ("Gun2");
 		health = maxHealth;
+
 	}
 
 
+	public void addPoint() {
+		points++;
+	}
 
 	void OnTriggerEnter(Collider c) {
 		if (c.CompareTag ("Boundary")) {
@@ -67,11 +73,12 @@ public class PlaneScript : MonoBehaviour {
 			BulletScript bs = c.GetComponent<BulletScript>();
 			if (bs.parent != this) {
 				health -= 1;
-				if (health <= 0) {
+				if (health <= 0 && alive) {
 					die ();
+					bs.parent.addPoint ();
 				}
 			}
-		} else {
+		} else if(alive) {
 			die ();
 		}
 	}
@@ -87,18 +94,18 @@ public class PlaneScript : MonoBehaviour {
 		throttle = 1;
 		bulletsFired = 0;
 		reloading = false;
+		points --;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (Input.GetAxis ("Fire1"));
 		if (alive) {
 			float speedFraction = Mathf.Max (speed/maxSpeed, 0.7f);
 			Vector3 dR = new Vector3(Input.GetAxis("Vertical"+playerNum) * pitchSpeed * Time.deltaTime * speedFraction,
 			                         Input.GetAxis ("Horizontal"+playerNum) * rollSpeed * Time.deltaTime * speedFraction,
 			                         Input.GetAxis ("Yaw"+playerNum) * yawSpeed * Time.deltaTime * speedFraction); //change in rotation from user input
 			//change in thrust from user input??
-			throttle += Input.GetAxis ("Throttle"+playerNum) * Time.deltaTime * throttleSensitivitys;
+			throttle += Input.GetAxis ("Throttle"+playerNum) * Time.deltaTime * throttleSensitivity;
 			throttle = Mathf.Clamp(throttle, 0, 1.2f);
 			//change in speed from angle
 			speed += transform.up.y * acceleration * Time.deltaTime + (throttle-1) * Time.deltaTime * acceleration; //the plane's "up" is along its length
@@ -160,7 +167,7 @@ public class PlaneScript : MonoBehaviour {
 	}
 
 	void updateText() {
-		text.text = "Throttle: " + (int)(throttle*100) + "%\nAltitude: " + (int)transform.position.y + "m\nSpeed: " + (int)speed + "m/s\nClip: " + (clipSize - bulletsFired);
+		text.text = "Throttle: " + (int)(throttle*100) + "%\nAltitude: " + (int)transform.position.y + "m\nSpeed: " + (int)speed + "m/s\nClip: " + (clipSize - bulletsFired) + "\nScore: " + points;
 
 
 	}
